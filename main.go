@@ -101,10 +101,9 @@ func InitPage() string {
 	}
 	xip = "localhost"
 	xdata = xdata + "<p> Host Port IP : " + xip + "</p>"
-
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/about'> [ About ] </A>  "
-
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/playground'> [ PlayGround ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/static/test123.html'> [ Test123 ] </A>  "
 
 	xdata = xdata + "<BR><BR>Go Web Server"
 	//------------------------------------------------------------------------
