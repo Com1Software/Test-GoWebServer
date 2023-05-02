@@ -1,9 +1,10 @@
 package main
 
 import (
-
+	"net"
 	"net/http"
-	 "net"
+	"os/exec"
+	"runtime"
 
 	"fmt"
 	"os"
@@ -34,7 +35,7 @@ func main() {
 			xdata := AboutPage()
 			fmt.Fprint(w, xdata)
 		})
-				//------------------------------------------------ PlayGround Page
+		//------------------------------------------------ PlayGround Page
 		http.HandleFunc("/playground", func(w http.ResponseWriter, r *http.Request) {
 			xdata := PlayGroundPage()
 			fmt.Fprint(w, xdata)
@@ -46,11 +47,32 @@ func main() {
 		http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 		//------------------------------------------------- Start Server
-
+		Openbrowser("http://localhost:8080")
 		if err := http.ListenAndServe(":8080", nil); err != nil {
 			panic(err)
 		}
 	}
+}
+
+// Openbrowser : Opens default web browser to specified url
+func Openbrowser(url string) error {
+	var cmd string
+	var args []string
+	switch runtime.GOOS {
+	case "windows":
+		cmd = "cmd"
+		args = []string{"/c", "start"}
+	case "linux":
+		cmd = "chromium-browser"
+		args = []string{""}
+
+	case "darwin":
+		cmd = "open"
+	default:
+		cmd = "xdg-open"
+	}
+	args = append(args, url)
+	return exec.Command(cmd, args...).Start()
 }
 
 func InitPage() string {
@@ -77,7 +99,7 @@ func InitPage() string {
 			xip = fmt.Sprintf("%s", ipv4)
 		}
 	}
-	xip="localhost"
+	xip = "localhost"
 	xdata = xdata + "<p> Host Port IP : " + xip + "</p>"
 
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/about'> [ About ] </A>  "
@@ -366,4 +388,3 @@ func DateTimeDisplay(xdata string) string {
 	return xdata
 
 }
-
