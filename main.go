@@ -153,6 +153,8 @@ func AboutPage() string {
 	xdata = xdata + "<p>Go Web Server</p>"
 	xdata = xdata + "<div id='txtdt'></div>"
 	//---------
+	xdata = xdata + "  <A HREF='https://github.com/Com1Software/Test-GoWebServer'> [ GoWebServer GitHub Repository ] </A>  "
+	xdata = xdata + "<BR>"
 	xdata = xdata + "Go Web Server"
 	//------------------------------------------------------------------------
 
