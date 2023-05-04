@@ -175,7 +175,7 @@ func TestPage() string {
 	xdata = xdata + "<title>Test Page</title>"
 	xdata = xdata + "  <link REL='StyleSheet' TYPE='text/css' HREF='static/css/style.css'>"
 	//------------------------------------------------------------------------
-	xdata = DateTimeDisplay(xdata)
+	xdata = LoopDisplay(xdata)
 	xdata = xdata + "<style>"
 	xdata = xdata + "body {"
 	xdata = xdata + "    background-color: grey;"
@@ -203,9 +203,9 @@ func TestPage() string {
 	xdata = xdata + "</style>"
 	xdata = xdata + "</head>"
 	//------------------------------------------------------------------------
-	xdata = xdata + "<body onload='startTime()'>"
+	xdata = xdata + "<body onload='startLoop()'>"
 	xdata = xdata + "<H1>Test Page</H1>"
-	xdata = xdata + "<div id='txtdt'></div>"
+	xdata = xdata + "<div id='txtloop'></div>"
 	//---------
 	xdata = xdata + "<center>"
 	xdata = xdata + "<p1>Go Web Server</p1>"
@@ -424,6 +424,29 @@ func DateTimeDisplay(xdata string) string {
 	xdata = xdata + "  if (i > 12) {i = i -12};"
 	xdata = xdata + "  return i;"
 	xdata = xdata + "}"
+	xdata = xdata + "</script>"
+	return xdata
+
+}
+
+func LoopDisplay(xdata string) string {
+	//------------------------------------------------------------------------
+	xdata = xdata + "<script>"
+	xdata = xdata + "function startLoop() {"
+	xdata = xdata + "  var today = new Date();"
+	xdata = xdata + "  var s = today.getSeconds();"
+	xdata = xdata + "  s = checkTimeMS(s);"
+	//------------------------------------------------------------------------
+	//  -------------------------------------------------------------------
+	xdata = xdata + "  document.getElementById('txtloop').innerHTML = ' - '+ s+' - ';"
+	xdata = xdata + "  var t = setTimeout(startLoop, 500);"
+	xdata = xdata + "}"
+	//----------
+	xdata = xdata + "function checkTimeMS(i) {"
+	xdata = xdata + "  if (i < 10) {i = '0' + i};"
+	xdata = xdata + "  return i;"
+	xdata = xdata + "}"
+	//----------
 	xdata = xdata + "</script>"
 	return xdata
 
