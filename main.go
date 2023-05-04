@@ -25,27 +25,29 @@ func main() {
 		fmt.Println("Server running....")
 		fmt.Println("Listening on port 8080")
 		fmt.Println("")
-		//------------------------------------------------ Home Page
+		//------------------------------------------------ Init Page Handler
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 			xdata := InitPage()
 			fmt.Fprint(w, xdata)
 		})
-		//------------------------------------------------ About Page
+		//------------------------------------------------ About Page Handler
 		http.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
 			xdata := AboutPage()
 			fmt.Fprint(w, xdata)
 		})
-		//------------------------------------------------ PlayGround Page
+		//------------------------------------------------ PlayGround Page Handler
 		http.HandleFunc("/playground", func(w http.ResponseWriter, r *http.Request) {
 			xdata := PlayGroundPage()
 			fmt.Fprint(w, xdata)
 		})
-
-		//------------------------------------------------- Static Handler
-
+		//------------------------------------------------ Display Page Handler
+		http.HandleFunc("/display", func(w http.ResponseWriter, r *http.Request) {
+			xdata := DisplayPage()
+			fmt.Fprint(w, xdata)
+		})
+		//------------------------------------------------- Static Handler Handler
 		fs := http.FileServer(http.Dir("static/"))
 		http.Handle("/static/", http.StripPrefix("/static/", fs))
-
 		//------------------------------------------------- Start Server
 		Openbrowser("http://localhost:8080")
 		if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -79,30 +81,32 @@ func InitPage() string {
 	//---------------------------------------------------------------------------
 	//----------------------------------------------------------------------------
 	xip := "localhost"
+	xxip := ""
 	xdata := "<!DOCTYPE html>"
 	xdata = xdata + "<html>"
 	xdata = xdata + "<head>"
 	//------------------------------------------------------------------------
-	xdata = xdata + "<title>Web Server Start Page</title>"
+	xdata = xdata + "<title>Go Web Server Start Page</title>"
 	xdata = xdata + "  <link REL='StyleSheet' TYPE='text/css' HREF='static/css/style.css'>"
 	//------------------------------------------------------------------------
 	xdata = xdata + "</head>"
 	//------------------------------------------------------------------------
 	xdata = xdata + "<body>"
-	xdata = xdata + "<p>Go Web Server.</p>"
+	xdata = xdata + "<H1>Go Web Server.</H1>"
 	//---------
 	host, _ := os.Hostname()
 	addrs, _ := net.LookupIP(host)
-
 	for _, addr := range addrs {
 		if ipv4 := addr.To4(); ipv4 != nil {
-			xip = fmt.Sprintf("%s", ipv4)
+			xxip = fmt.Sprintf("%s", ipv4)
 		}
 	}
 	xip = "localhost"
-	xdata = xdata + "<p> Host Port IP : " + xip + "</p>"
+	xdata = xdata + "<p> Host Port IP : " + xip
+	xdata = xdata + "<BR> Machine IP : " + xxip + "</p>"
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/about'> [ About ] </A>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/playground'> [ PlayGround ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/display'> [ Display ] </A>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/static/test123.html'> [ Test123 ] </A>  "
 
 	xdata = xdata + "<BR><BR>Go Web Server"
@@ -145,6 +149,64 @@ func AboutPage() string {
 	xdata = xdata + "<div id='txt'></div>"
 	//---------
 	xdata = xdata + "Go Web Server"
+	//------------------------------------------------------------------------
+	//------------------------------------------------------------------------
+	xdata = xdata + " </body>"
+	xdata = xdata + " </html>"
+	return xdata
+
+}
+
+//----------------------------------------------------------------
+func DisplayPage() string {
+	//---------------------------------------------------------------------------
+
+	//----------------------------------------------------------------------------
+	xdata := "<!DOCTYPE html>"
+	xdata = xdata + "<html>"
+	xdata = xdata + "<head>"
+	//------------------------------------------------------------------------
+	xdata = xdata + "<title>Display Page</title>"
+	xdata = xdata + "  <link REL='StyleSheet' TYPE='text/css' HREF='static/css/style.css'>"
+	//------------------------------------------------------------------------
+	xdata = DateTimeDisplay(xdata)
+	xdata = xdata + "<style>"
+	xdata = xdata + "body {"
+	xdata = xdata + "    background-color: black;"
+	xdata = xdata + "}"
+	xdata = xdata + "	h1 {"
+	xdata = xdata + "	color: white;"
+	xdata = xdata + "	text-align: center;"
+	xdata = xdata + "}"
+	xdata = xdata + "	p1 {"
+	xdata = xdata + "color: green;"
+	xdata = xdata + "font-family: verdana;"
+	xdata = xdata + "	font-size: 20px;"
+	xdata = xdata + "}"
+	xdata = xdata + "	p2 {"
+	xdata = xdata + "color: red;"
+	xdata = xdata + "font-family: verdana;"
+	xdata = xdata + "	font-size: 20px;"
+	xdata = xdata + "}"
+	xdata = xdata + "	div {"
+	xdata = xdata + "color: white;"
+	xdata = xdata + "font-family: verdana;"
+	xdata = xdata + "	font-size: 20px;"
+	xdata = xdata + "	text-align: center;"
+	xdata = xdata + "}"
+	xdata = xdata + "</style>"
+	xdata = xdata + "</head>"
+	//------------------------------------------------------------------------
+	xdata = xdata + "<body onload='startTime()'>"
+	xdata = xdata + "<H1>Display Page</H1>"
+	xdata = xdata + "<div id='txt'></div>"
+	//---------
+	xdata = xdata + "<center>"
+	xdata = xdata + "<p1>Go Web Server</p1>"
+	xdata = xdata + "<BR>"
+	xdata = xdata + "<p2>Go Web Server</p2>"
+	xdata = xdata + "</center>"
+
 	//------------------------------------------------------------------------
 	//------------------------------------------------------------------------
 	xdata = xdata + " </body>"
