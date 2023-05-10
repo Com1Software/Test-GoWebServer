@@ -4,6 +4,8 @@ https://www.w3schools.com/js/default.asp
 
 https://stackoverflow.com/questions/58036704/how-can-i-pass-multiple-ids-in-getelementbyid
 
+https://stackoverflow.com/questions/29839996/calling-more-than-1-function-in-settimeout
+
 https://sweetcode.io/using-html5-server-sent-events/
 
 https://www.w3schools.com/js/tryit.asp?filename=tryjs_random
