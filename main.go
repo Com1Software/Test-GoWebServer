@@ -440,7 +440,7 @@ func LoopDisplay(xdata string) string {
 	xdata = xdata + "  s = checkTimeMS(s);"
 	//------------------------------------------------------------------------
 	//  -------------------------------------------------------------------
-	xdata = xdata + "  document.getElementById('txtloop').innerHTML = ' - '+ s+' - ';"
+	xdata = xdata + "  document.getElementById('txtloop').innerHTML = Math.random();"
 	xdata = xdata + "  var t = setTimeout(startLoop, 500);"
 	xdata = xdata + "}"
 	//----------
