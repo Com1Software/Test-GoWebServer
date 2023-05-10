@@ -178,6 +178,7 @@ func TestPage() string {
 	xdata = xdata + "  <link REL='StyleSheet' TYPE='text/css' HREF='static/css/style.css'>"
 	//------------------------------------------------------------------------
 	xdata = LoopDisplay(xdata)
+
 	xdata = xdata + "<style>"
 	xdata = xdata + "body {"
 	xdata = xdata + "    background-color: grey;"
@@ -435,20 +436,10 @@ func LoopDisplay(xdata string) string {
 	//------------------------------------------------------------------------
 	xdata = xdata + "<script>"
 	xdata = xdata + "function startLoop() {"
-	xdata = xdata + "  var today = new Date();"
-	xdata = xdata + "  var s = today.getSeconds();"
-	xdata = xdata + "  s = checkTimeMS(s);"
-	//------------------------------------------------------------------------
 	//  -------------------------------------------------------------------
 	xdata = xdata + "  document.getElementById('txtloop').innerHTML = Math.random();"
 	xdata = xdata + "  var t = setTimeout(startLoop, 500);"
 	xdata = xdata + "}"
-	//----------
-	xdata = xdata + "function checkTimeMS(i) {"
-	xdata = xdata + "  if (i < 10) {i = '0' + i};"
-	xdata = xdata + "  return i;"
-	xdata = xdata + "}"
-	//----------
 	xdata = xdata + "</script>"
 	return xdata
 
