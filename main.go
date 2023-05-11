@@ -113,7 +113,10 @@ func InitPage() string {
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/playground'> [ PlayGround ] </A>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/display'> [ Display ] </A>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/test'> [ Testing ] </A>  "
+	xdata = xdata + "  <BR>  Static :"
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/static/test123.html'> [ Test123 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/static/index.html'> [ Index ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/static/testdev.html'> [ TestDev ] </A>  "
 	xdata = xdata + "<BR><BR>Go Web Server...."
 	//------------------------------------------------------------------------
 	xdata = xdata + " </body>"
