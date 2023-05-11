@@ -5,16 +5,28 @@
  function startLoop() {
  document.getElementById('txtloop').innerHTML = Math.random();
  var t = setTimeout(startLoop, 500);
+}
+function startLoopa() {
+ document.getElementById('txtloopa').innerHTML = Math.random();
+ var t = setTimeout(startLoopa, 100);
  }
+ function startLoopb() {
+ document.getElementById('txtloopb').innerHTML = Math.random();
+ var t = setTimeout(startLoopb, 1000);
+ }
+ 
  </script>
 </head>
 <body>
 
 <h1>Test Dev...</h1>
-<body onload='startLoop()'>
-<div id='txtloop'></div>
+<body onload='startLoop(),startLoopa(),startLoopb()'>
+<d1 id='txtloop'></d1>
 
 <p>Hello World.</p>
+<d2 id='txtloopa'></d2>
+<BR>
+<d3 id='txtloopb'></d3>
 
 </body>
 </html>
