@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html>
+<head>
+<script>
+ function startLoop() {
+ document.getElementById('txtloop').innerHTML = Math.random();
+ var t = setTimeout(startLoop, 500);
+ }
+ </script>
+</head>
 <body>
 
 <h1>Test Dev...</h1>
+<body onload='startLoop()'>
+<div id='txtloop'></div>
 
 <p>Hello World.</p>
 
