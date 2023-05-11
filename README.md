@@ -2,6 +2,8 @@
 
 https://www.w3schools.com/js/default.asp
 
+https://en.wikipedia.org/wiki/Server-sent_events
+
 https://stackoverflow.com/questions/58036704/how-can-i-pass-multiple-ids-in-getelementbyid
 
 https://stackoverflow.com/questions/29839996/calling-more-than-1-function-in-settimeout
