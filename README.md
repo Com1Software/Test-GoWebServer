@@ -1,15 +1,19 @@
 # Test GoWebServer
 
 
-## Installation
+## Installation Build and Run
+(Windows)
 
 ```shell
-git clone https://github.com/Com1Software/Test-GoWebServer.git
-
+git clone https://github.com/Com1Software/Test-GoWebServer.git gowebserver
+cd gowebserver
+go mod init testserver
+go mod tidy
+go build
+testserver
 ```
 
-
-
+## Useful Links
 
 
 https://www.w3schools.com/js/default.asp
