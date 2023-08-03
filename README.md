@@ -1,4 +1,16 @@
-# Test-Web-Go
+# Test GoWebServer
+
+
+## Installation
+
+```shell
+git clone https://github.com/Com1Software/Test-GoWebServer.git
+
+```
+
+
+
+
 
 https://www.w3schools.com/js/default.asp
 
