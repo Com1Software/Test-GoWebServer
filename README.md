@@ -16,6 +16,7 @@ testserver
 
 ## Useful Links
 
+[Go Package net/http Documentation](https://pkg.go.dev/net/http)
 
 [JavaScript Tutorial - w3school ](https://www.w3schools.com/js/default.asp)
 
