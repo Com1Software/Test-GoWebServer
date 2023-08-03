@@ -2,7 +2,6 @@
 
 
 ## Installation Build and Run
-(Windows)
 
 ```shell
 git clone https://github.com/Com1Software/Test-GoWebServer.git gowebserver
