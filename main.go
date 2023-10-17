@@ -13,6 +13,7 @@ import (
 //----------------------------------------------------------------
 func main() {
 	fmt.Println("Go Web Server")
+	fmt.Printf("Operating System : %s\n", runtime.GOOS)
 	switch {
 	//-------------------------------------------------------------
 	case len(os.Args) == 2:
@@ -24,6 +25,8 @@ func main() {
 
 		fmt.Println("Server running....")
 		fmt.Println("Listening on port 8080")
+		fmt.Printf("Outbound IP  : %s\n", GetOutboundIP())
+
 		fmt.Println("")
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 			xdata := InitPage()
@@ -446,4 +449,17 @@ func LoopDisplay(xdata string) string {
 	xdata = xdata + "</script>"
 	return xdata
 
+}
+
+
+func GetOutboundIP() net.IP {
+	conn, err := net.Dial("udp", "8.8.8.8:80")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+
+	localAddr := conn.LocalAddr().(*net.UDPAddr)
+
+	return localAddr.IP
 }
