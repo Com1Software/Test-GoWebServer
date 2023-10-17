@@ -14,6 +14,8 @@ import (
 func main() {
 	fmt.Println("Go Web Server")
 	fmt.Printf("Operating System : %s\n", runtime.GOOS)
+	xip:=fmt.Sprintf("%s",GetOutboundIP())
+	port:="8080"
 	switch {
 	//-------------------------------------------------------------
 	case len(os.Args) == 2:
@@ -24,12 +26,11 @@ func main() {
 	default:
 
 		fmt.Println("Server running....")
-		fmt.Println("Listening on port 8080")
-		fmt.Printf("Outbound IP  : %s\n", GetOutboundIP())
-
+		fmt.Println("Listening on "+xip+":"+port)
+		
 		fmt.Println("")
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			xdata := InitPage()
+			xdata := InitPage(xip)
 			fmt.Fprint(w, xdata)
 		})
 		//------------------------------------------------ About Page Handler
@@ -49,7 +50,7 @@ func main() {
 		})
 		//------------------------------------------------ Test Page Handler
 		http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
-			xdata := TestPage()
+			xdata := TestPage(xip)
 			fmt.Fprint(w, xdata)
 		})
 
@@ -57,8 +58,8 @@ func main() {
 		fs := http.FileServer(http.Dir("static/"))
 		http.Handle("/static/", http.StripPrefix("/static/", fs))
 		//------------------------------------------------- Start Server
-		Openbrowser("http://localhost:8080")
-		if err := http.ListenAndServe(":8080", nil); err != nil {
+		Openbrowser(xip+":"+port)
+		if err := http.ListenAndServe(xip+":"+port, nil); err != nil {
 			panic(err)
 		}
 	}
@@ -85,10 +86,9 @@ func Openbrowser(url string) error {
 	return exec.Command(cmd, args...).Start()
 }
 
-func InitPage() string {
+func InitPage(xip string) string {
 	//---------------------------------------------------------------------------
 	//----------------------------------------------------------------------------
-	xip := "localhost"
 	xxip := ""
 	xdata := "<!DOCTYPE html>"
 	xdata = xdata + "<html>"
@@ -109,7 +109,6 @@ func InitPage() string {
 			xxip = fmt.Sprintf("%s", ipv4)
 		}
 	}
-	xip = "localhost"
 	xdata = xdata + "<p> Host Port IP : " + xip
 	xdata = xdata + "<BR> Machine IP : " + xxip + "</p>"
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/about'> [ About ] </A>  "
@@ -172,7 +171,7 @@ func AboutPage() string {
 }
 
 //----------------------------------------------------------------
-func TestPage() string {
+func TestPage(xip string) string {
 	//---------------------------------------------------------------------------
 
 	//----------------------------------------------------------------------------
@@ -223,7 +222,7 @@ func TestPage() string {
 	xdata = xdata + "</center>"
 
 	//------------------------------------------------------------------------
-	//	xdata = xdata + "  <A HREF='http://" + xip + ":8080'> [ Return to Start Page ] </A>  "
+		xdata = xdata + "  <A HREF='http://" + xip + ":8080'> [ Return to Start Page ] </A>  "
 
 	//------------------------------------------------------------------------
 	xdata = xdata + " </body>"
