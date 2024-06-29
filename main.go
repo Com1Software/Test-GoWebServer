@@ -10,12 +10,12 @@ import (
 	"os"
 )
 
-//----------------------------------------------------------------
+// ----------------------------------------------------------------
 func main() {
 	fmt.Println("Go Web Server")
 	fmt.Printf("Operating System : %s\n", runtime.GOOS)
-	xip:=fmt.Sprintf("%s",GetOutboundIP())
-	port:="8080"
+	xip := fmt.Sprintf("%s", GetOutboundIP())
+	port := "8080"
 	switch {
 	//-------------------------------------------------------------
 	case len(os.Args) == 2:
@@ -26,8 +26,8 @@ func main() {
 	default:
 
 		fmt.Println("Server running....")
-		fmt.Println("Listening on "+xip+":"+port)
-		
+		fmt.Println("Listening on " + xip + ":" + port)
+
 		fmt.Println("")
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 			xdata := InitPage(xip)
@@ -58,7 +58,7 @@ func main() {
 		fs := http.FileServer(http.Dir("static/"))
 		http.Handle("/static/", http.StripPrefix("/static/", fs))
 		//------------------------------------------------- Start Server
-		Openbrowser(xip+":"+port)
+		Openbrowser(xip + ":" + port)
 		if err := http.ListenAndServe(xip+":"+port, nil); err != nil {
 			panic(err)
 		}
@@ -72,7 +72,7 @@ func Openbrowser(url string) error {
 	switch runtime.GOOS {
 	case "windows":
 		cmd = "cmd"
-		args = []string{"/c", "start"}
+		args = []string{"/c", "start msedge"}
 	case "linux":
 		cmd = "chromium-browser"
 		args = []string{""}
@@ -126,7 +126,7 @@ func InitPage(xip string) string {
 	return xdata
 }
 
-//----------------------------------------------------------------
+// ----------------------------------------------------------------
 func AboutPage() string {
 	//---------------------------------------------------------------------------
 
@@ -170,7 +170,7 @@ func AboutPage() string {
 
 }
 
-//----------------------------------------------------------------
+// ----------------------------------------------------------------
 func TestPage(xip string) string {
 	//---------------------------------------------------------------------------
 
@@ -222,7 +222,7 @@ func TestPage(xip string) string {
 	xdata = xdata + "</center>"
 
 	//------------------------------------------------------------------------
-		xdata = xdata + "  <A HREF='http://" + xip + ":8080'> [ Return to Start Page ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080'> [ Return to Start Page ] </A>  "
 
 	//------------------------------------------------------------------------
 	xdata = xdata + " </body>"
@@ -231,7 +231,7 @@ func TestPage(xip string) string {
 
 }
 
-//----------------------------------------------------------------
+// ----------------------------------------------------------------
 func DisplayPage() string {
 	//---------------------------------------------------------------------------
 
@@ -290,8 +290,8 @@ func DisplayPage() string {
 
 }
 
-//----------------------------------------------------------------
-//----------------------------------------------------------------
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
 func PlayGroundPage() string {
 	//---------------------------------------------------------------------------
 
